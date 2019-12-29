@@ -1,5 +1,8 @@
+<?php
+ include('./librerias/conexion.php');
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
@@ -22,24 +25,26 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>prueba1@mail.com</td>
-      <td>123</td>
-      <td>Prueba1</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>prueba2@mail.com</td>
-      <td>123</td>
-      <td>Prueba2</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>prueba3@mail.com</td>
-      <td>123</td>
-      <td>Prueba3</td>
-    </tr>
+    <?php
+      $sql= "SELECT * FROM users";
+      $result = mysqli_query($link,$sql);
+
+      if (!$result) {
+        echo "La tabla está vacía";
+      }
+      else{
+        while($row = mysqli_fetch_array($result)){
+          echo ' <tr>
+      <th scope="row">'.$row["id"].'</th>
+      <td>'.$row["email"].'</td>
+      <td>'.$row["password"].'</td>
+      <td>'.$row["name"].'</td>
+    </tr>';
+        }
+      }
+    ?>
+
+    
   </tbody>
 </table>
 </div>
